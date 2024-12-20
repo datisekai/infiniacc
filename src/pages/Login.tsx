@@ -47,9 +47,7 @@ const Login = () => {
       <div className="absolute top-[15%] w-[130px] md:top-[50%] translate-y-[-50%] md:left-[10%] md:w-[250px] left-[50%] translate-x-[-50%]">
         <LazyLoadImage src={Icon2} />
       </div>
-      <div className="md:hidden absolute bottom-[10%] w-[100px] left-[50%] translate-x-[-50%]">
-        <LazyLoadImage src={Icon1} />
-      </div>
+
       <div className="absolute hidden md:block md:top-[50%] translate-y-[-50%] md:right-[5%] md:w-[200px] ">
         <LazyLoadImage src={Icon1} />
       </div>
