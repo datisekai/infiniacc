@@ -19,7 +19,7 @@ const Login = () => {
             <div className="flex justify-center">
               <KeyVisual />
             </div>
-            <div className="font-bold text-center text-2xl">
+            <div className="text-gradient-primary font-bold text-center text-2xl">
               Chào mừng bạn đến với Infiniacc
             </div>
             <div className="text-center">
