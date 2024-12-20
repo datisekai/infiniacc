@@ -5,6 +5,8 @@ import { FaUserSecret } from "react-icons/fa";
 import { MdOutlinePriceCheck } from "react-icons/md";
 import { AiFillGold } from "react-icons/ai";
 
+export const BASE_URL = "";
+
 export const sidebarConfig = [
   {
     label: "Trang chủ",
@@ -30,6 +32,5 @@ export const sidebarConfig = [
     label: "Mua vàng",
     icon: AiFillGold,
     to: "https://www.shopbanvang.com/",
-    target: "_blank",
   },
 ];

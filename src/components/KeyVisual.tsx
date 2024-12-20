@@ -1,13 +1,12 @@
-import React from 'react'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const KeyVisual = () => {
-    return (
-        <div className="w-[150px]">
-            <LazyLoadImage effect='blur' src="/logo.webp"></LazyLoadImage>
-        </div>
+  return (
+    <div className="w-[150px]">
+      <LazyLoadImage effect="blur" src="/logo.webp"></LazyLoadImage>
+    </div>
+  );
+};
 
-    )
-}
-
-export default KeyVisual
+export default React.memo(KeyVisual);
