@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BackgroundLoginImg from "../assets/login/bg-login.webp";
 import KeyVisual from "../components/KeyVisual";
 import BorderGradient from "../components/BorderGradient";
@@ -8,9 +8,21 @@ import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Icon1 from "../assets/login/icon1.webp";
 import Icon2 from "../assets/login/icon2.webp";
+import { useAuthStore } from "../stores/authStore";
 
 const Login = () => {
   const { changeView, backPreviousView } = useChangeRoute();
+  const { login, token } = useAuthStore();
+
+  useEffect(() => {
+    if (token) {
+      changeView(pathNames.home)
+    }
+  }, [token])
+
+  const handleLogin = () => {
+    login();
+  }
   return (
     <div className="bg-dark1">
       <div className="w-full min-h-screen flex items-center justify-center px-4">
@@ -27,7 +39,7 @@ const Login = () => {
             </div>
             <div className="flex justify-center mt-8">
               <button
-                onClick={() => changeView(pathNames.home)}
+                onClick={handleLogin}
                 className="warning-btn w-full"
               >
                 Đăng nhập với Google

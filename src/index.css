@@ -14,3 +14,25 @@ body {
   font-family: "Kanit", serif;
   color: white;
 }
+
+.dropdown-container {
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.dropdown-content,
+.panel-content,
+.select-panel {
+  background-color: #131720 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.dropdown-content input {
+  background-color: #131720 !important;
+}
+
+.dropdown-content .select-item:hover {
+  background-color: #181c24 !important;
+}

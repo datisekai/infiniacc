@@ -6,9 +6,16 @@ import { IoLogOut } from "react-icons/io5";
 import Coin from "../Coin";
 import useChangeRoute from "../../hooks/useChangeRoute";
 import { pathNames } from "../../constants/pathname";
+import { useAuthStore } from "../../stores/authStore";
 
 const UserSidebar = () => {
   const { changeView } = useChangeRoute();
+
+  const { logout } = useAuthStore()
+  const handleLogout = () => {
+    logout()
+    changeView(pathNames.login)
+  }
   return (
     <div className="px-4">
       <div className="flex items-center justify-between">
@@ -25,7 +32,7 @@ const UserSidebar = () => {
           <div className="text-gradient-secondary inline">Infiniacc</div>
         </div>
         <BorderGradient
-          onClick={() => changeView(pathNames.login)}
+          onClick={handleLogout}
           hover={true}
           borderColor="#7d3e3e"
         >

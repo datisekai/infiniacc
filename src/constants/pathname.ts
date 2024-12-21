@@ -4,4 +4,7 @@ export const pathNames = {
   profile: "/profile",
   pricing: "/pricing",
   deposit: "/deposit",
+  wall: "/profile/:username",
+  createAccount: "/create-account",
+  editAccount: "/edit-account/:id",
 };

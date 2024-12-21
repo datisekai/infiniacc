@@ -6,6 +6,9 @@ import Home from "../pages/Home";
 import Pricing from "../pages/Pricing";
 import Deposit from "../pages/Deposit";
 import Profile from "../pages/Profile";
+import Wall from "../pages/Wall";
+import CreateAccount from "../pages/Account/CreateAccount";
+import EditAccount from "../pages/Account/EditAccount";
 
 const router = createBrowserRouter([
 
@@ -32,6 +35,18 @@ const router = createBrowserRouter([
             {
                 path: pathNames.profile,
                 element: <Profile />
+            },
+            {
+                path: pathNames.wall,
+                element: <Wall />
+            },
+            {
+                path: pathNames.createAccount,
+                element: <CreateAccount />
+            },
+            {
+                path: pathNames.editAccount,
+                element: <EditAccount />
             }
         ],
     },

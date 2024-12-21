@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import KeyVisual from "../KeyVisual";
 import { sidebarConfig } from "../../constants";
@@ -6,10 +6,17 @@ import BorderGradient from "../BorderGradient";
 import UserSidebar from "./UserSidebar";
 import useChangeRoute from "../../hooks/useChangeRoute";
 import { pathNames } from "../../constants/pathname";
+import { useCommonStore } from "../../stores/commonStore";
 
 const Sidebar = () => {
   const { pathname } = useLocation();
   const { changeView } = useChangeRoute();
+  const { resetActions } = useCommonStore()
+
+  useEffect(() => {
+    resetActions()
+  }, [pathname])
+
   return (
     <div className="bg-dark1 w-[250px] h-full shadow-lg py-4">
       <div className="flex justify-center pb-4 border-b border-divide">
@@ -27,6 +34,9 @@ const Sidebar = () => {
       <div className="mt-8 space-y-2 px-4">
         {sidebarConfig?.map((item, index) => {
           const Icon = item.icon;
+          if (item.to == pathNames.wall) {
+            item.to = item.to.replace(':username', "datisekai")
+          }
           return (
             <BorderGradient
               key={index}
