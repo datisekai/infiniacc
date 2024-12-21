@@ -7,11 +7,13 @@ import UserSidebar from "./UserSidebar";
 import useChangeRoute from "../../hooks/useChangeRoute";
 import { pathNames } from "../../constants/pathname";
 import { useCommonStore } from "../../stores/commonStore";
+import { useAuthStore } from "../../stores/authStore";
 
 const Sidebar = () => {
   const { pathname } = useLocation();
   const { changeView } = useChangeRoute();
   const { resetActions } = useCommonStore()
+  const { token } = useAuthStore()
 
   useEffect(() => {
     resetActions()
@@ -28,9 +30,9 @@ const Sidebar = () => {
           <KeyVisual />
         </div>
       </div>
-      <div className="py-4 border-b border-divide">
+      {token && <div className="py-4 border-b border-divide">
         <UserSidebar />
-      </div>
+      </div>}
       <div className="mt-8 space-y-2 px-4">
         {sidebarConfig?.map((item, index) => {
           const Icon = item.icon;
