@@ -1,3 +1,14 @@
+import SkhSongoku from "../../assets/skhs/songoku.webp";
+import SkhCadic from "../../assets/skhs/cadic.webp";
+import SkhKakarot from "../../assets/skhs/kakarot.webp";
+import SkhKirilin from "../../assets/skhs/kirilin.webp";
+import SkhOctieu from "../../assets/skhs/octieu.webp";
+import SkhPicolo from "../../assets/skhs/picolo.webp";
+import SkhTienxinhan from "../../assets/skhs/tienxinhan.webp";
+import SkhDaimao from "../../assets/skhs/daimao.webp";
+import SkhNappa from "../../assets/skhs/nappa.webp";
+import DetuBroly from "../../assets/skhs/broly.webp";
+import DetuMabu from "../../assets/skhs/mabu.webp";
 export const servers = [
   {
     label: "Server 1",
@@ -37,53 +48,53 @@ export const planets = [
 export const skhs = [
   {
     label: "Không có",
-    value: "khong_co",
+    value: "",
     icon: "",
   },
   {
     label: "Songoku",
     value: "songoku",
-    icon: "",
+    icon: SkhSongoku,
   },
   {
     label: "Tien Shinhan",
     value: "txh",
-    icon: "",
+    icon: SkhTienxinhan,
   },
   {
     label: "Kirilin",
     value: "kirilin",
-    icon: "",
+    icon: SkhKirilin,
   },
   {
     label: "Nappa",
     value: "nappa",
-    icon: "",
+    icon: SkhNappa,
   },
   {
     label: "Kakarot",
     value: "kakarot",
-    icon: "",
+    icon: SkhKakarot,
   },
   {
     label: "Cadic",
     value: "cadic",
-    icon: "",
+    icon: SkhCadic,
   },
   {
     label: "Ốc tiêu",
     value: "oc_tieu",
-    icon: "",
+    icon: SkhOctieu,
   },
   {
     label: "Picolo",
     value: "picolo",
-    icon: "",
+    icon: SkhPicolo,
   },
   {
     label: "Daimao",
     value: "daimao",
-    icon: "",
+    icon: SkhDaimao,
   },
 ];
 
@@ -96,12 +107,12 @@ export const detus = [
   {
     label: "Đệ mabu",
     value: "mabu",
-    icon: "",
+    icon: DetuMabu,
   },
   {
     label: "Đệ broly",
     value: "broly",
-    icon: "",
+    icon: DetuBroly,
   },
 ];
 
