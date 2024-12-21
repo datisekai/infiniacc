@@ -8,6 +8,7 @@ import XaydaIcon from "../../assets/planet/xayda.webp";
 import TraiDatIcon from "../../assets/planet/trai-dat.webp";
 import NamekIcon from "../../assets/planet/namek.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { bongtais, detus, mocquays, servers, skhs } from "../../pages/Account/const";
 
 const planes = [
   {
@@ -69,7 +70,7 @@ const FilterBox = () => {
               Xoá tất cả
             </button>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 space-y-4 max-h-[calc(100vh-61px)] pb-20 overflow-y-auto">
             <Dropdown title="Hành tinh">
               <div className="mt-4 space-y-2">
                 {planes.map((item, index) => {
@@ -88,6 +89,131 @@ const FilterBox = () => {
                           effect="blur"
                           className="w-7"
                         />
+                        <span>{item.label}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Dropdown>
+            <Dropdown title="Server">
+              <div className="mt-4 space-y-2">
+                {servers.map((item, index) => {
+                  return (
+                    <div
+                      key={item.value}
+                      className="flex items-center gap-4 hover:cursor-pointer hover:text-primary "
+                      onClick={() => handleToggle(item.value)}
+                    >
+                      <Checkbox
+                        checked={filter?.planet?.includes(item.value)}
+                      />
+                      <div className="items-center flex gap-1">
+                        {item.icon && <LazyLoadImage
+                          src={item.icon}
+                          effect="blur"
+                          className="w-7"
+                        />}
+                        <span>{item.label}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Dropdown>
+            <Dropdown title="Set kích hoạt">
+              <div className="mt-4 space-y-2">
+                {skhs.map((item, index) => {
+                  return (
+                    <div
+                      key={item.value}
+                      className="flex items-center gap-4 hover:cursor-pointer hover:text-primary "
+                      onClick={() => handleToggle(item.value)}
+                    >
+                      <Checkbox
+                        checked={filter?.planet?.includes(item.value)}
+                      />
+                      <div className="items-center flex gap-1">
+                        {item.icon && <LazyLoadImage
+                          src={item.icon}
+                          effect="blur"
+                          className="w-7"
+                        />}
+                        <span>{item.label}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Dropdown>
+            <Dropdown title="Đệ tử">
+              <div className="mt-4 space-y-2">
+                {detus.map((item, index) => {
+                  return (
+                    <div
+                      key={item.value}
+                      className="flex items-center gap-4 hover:cursor-pointer hover:text-primary "
+                      onClick={() => handleToggle(item.value)}
+                    >
+                      <Checkbox
+                        checked={filter?.planet?.includes(item.value)}
+                      />
+                      <div className="items-center flex gap-1">
+                        {item.icon && <LazyLoadImage
+                          src={item.icon}
+                          effect="blur"
+                          className="w-7"
+                        />}
+                        <span>{item.label}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Dropdown>
+            <Dropdown title="Bông tai">
+              <div className="mt-4 space-y-2">
+                {bongtais.map((item, index) => {
+                  return (
+                    <div
+                      key={item.value}
+                      className="flex items-center gap-4 hover:cursor-pointer hover:text-primary "
+                      onClick={() => handleToggle(item.value)}
+                    >
+                      <Checkbox
+                        checked={filter?.planet?.includes(item.value)}
+                      />
+                      <div className="items-center flex gap-1">
+                        {item.icon && <LazyLoadImage
+                          src={item.icon}
+                          effect="blur"
+                          className="w-7"
+                        />}
+                        <span>{item.label}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Dropdown>
+            <Dropdown title="Mốc quay thượng đế">
+              <div className="mt-4 space-y-2">
+                {mocquays.map((item, index) => {
+                  return (
+                    <div
+                      key={item.value}
+                      className="flex items-center gap-4 hover:cursor-pointer hover:text-primary "
+                      onClick={() => handleToggle(item.value)}
+                    >
+                      <Checkbox
+                        checked={filter?.planet?.includes(item.value)}
+                      />
+                      <div className="items-center flex gap-1">
+                        {item.icon && <LazyLoadImage
+                          src={item.icon}
+                          effect="blur"
+                          className="w-7"
+                        />}
                         <span>{item.label}</span>
                       </div>
                     </div>
