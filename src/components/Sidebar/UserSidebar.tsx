@@ -1,7 +1,7 @@
 import React from "react";
 import BorderGradient from "../BorderGradient";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { getRandomAvatar } from "../../utils";
+import { getImageServer, getRandomAvatar } from "../../utils";
 import { IoLogOut } from "react-icons/io5";
 import Coin from "../Coin";
 import useChangeRoute from "../../hooks/useChangeRoute";
@@ -10,6 +10,7 @@ import { useAuthStore } from "../../stores/authStore";
 
 const UserSidebar = () => {
   const { changeView } = useChangeRoute();
+  const { user } = useAuthStore()
 
   const { logout } = useAuthStore()
   const handleLogout = () => {
@@ -24,12 +25,14 @@ const UserSidebar = () => {
             borderColor="linear-gradient(63.2deg, rgba(0, 0, 0, 0) 6.15%, rgba(102, 99, 41, 0.7) 50.46%, rgb(164, 169, 62) 68.92%, rgba(120, 111, 51, 0.1) 80%)"
             borderRadius={50}
           >
-            <LazyLoadImage
-              src={getRandomAvatar("Infiniacc")}
-              className="w-14"
-            />
+            <div className="p-1">
+              <LazyLoadImage
+                src={user.avatar ? getImageServer(user.avatar) : getRandomAvatar(user.name)}
+                className="w-10 rounded-full"
+              />
+            </div>
           </BorderGradient>
-          <div className="text-gradient-secondary inline">Infiniacc</div>
+          <div className="text-gradient-secondary inline">{user?.name}</div>
         </div>
         <BorderGradient
           onClick={handleLogout}
@@ -46,7 +49,7 @@ const UserSidebar = () => {
         <BorderGradient borderColor="linear-gradient(63.2deg, rgba(0, 0, 0, 0) 6.15%, rgba(102, 99, 41, 0.7) 50.46%, rgb(164, 169, 62) 68.92%, rgba(120, 111, 51, 0.1) 80%)">
           <div className="flex items-center gap-2 px-4 py-2">
             <Coin className="w-6" />
-            <div>85,000 VND</div>
+            <div>0 VND</div>
           </div>
         </BorderGradient>
       </div>

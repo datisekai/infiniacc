@@ -13,9 +13,9 @@ export function randomString(length: number) {
   return result;
 }
 
-export function getRandomAvatar(name?: string) {
+export function getRandomAvatar(url?: string) {
   return `https://api.dicebear.com/9.x/adventurer/svg?seed=${
-    name || "Infiniacc"
+    url || "Infiniacc"
   }`;
 }
 
@@ -51,3 +51,5 @@ export const formatCash = (n: number) => {
   if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
   if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
 };
+
+export * from "./local-store";

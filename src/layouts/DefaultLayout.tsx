@@ -3,9 +3,32 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { useCommonStore } from "../stores/commonStore";
 import HeaderBack from "../components/HeaderBack";
+import { GoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
+import { useAuthStore } from "../stores/authStore";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const DefaultLayout = () => {
   const { header } = useCommonStore()
+  const { token, login, getMe } = useAuthStore()
+
+
+
+  const handleLogin = async (idToken: string) => {
+    const result = await login(idToken)
+    if (result) {
+      toast.success("Đăng nhập thành công")
+    } else {
+      toast.error("Đăng nhập thất bại")
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      getMe()
+    }
+  }, [token])
+
   return (
     <>
       <div className="flex">
@@ -20,6 +43,16 @@ const DefaultLayout = () => {
           </div>
         </div>
       </div>
+
+      {!token && <GoogleLogin
+        onSuccess={credentialResponse => {
+          handleLogin(credentialResponse?.credential as string)
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+        useOneTap
+      />}
     </>
   );
 };

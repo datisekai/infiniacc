@@ -9,10 +9,26 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import Icon1 from "../assets/login/icon1.webp";
 import Icon2 from "../assets/login/icon2.webp";
 import { useAuthStore } from "../stores/authStore";
+import { useGoogleLogin } from "@react-oauth/google";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { changeView, backPreviousView } = useChangeRoute();
   const { login, token } = useAuthStore();
+
+  const loginGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log(tokenResponse);
+      // const result = await login(tokenResponse.);
+      // if (result) {
+      //   toast.success("Đăng nhập thành công")
+      // } else {
+      //   toast.error("Đăng nhập thất bại")
+      // }
+    },
+    prompt: "select_account"
+
+  });
 
   useEffect(() => {
     if (token) {
@@ -21,7 +37,7 @@ const Login = () => {
   }, [token])
 
   const handleLogin = () => {
-    login();
+    loginGoogle();
   }
   return (
     <div className="bg-dark1">

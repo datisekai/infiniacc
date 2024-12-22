@@ -9,6 +9,7 @@ export interface IAction {
 
 interface ICommonState {
   isLoadingApi: boolean;
+  isLoadingUpload: any;
   header: {
     title: string;
     actions: IAction[];
@@ -17,11 +18,14 @@ interface ICommonState {
   setHeaderTitle: (title: string) => void;
   setHeaderActions: (actions: IAction[]) => void;
   setHeaderBack: (headerBack: boolean) => void;
+  setLoading: (isLoading: boolean) => void;
+  setLoadingUpload: (key: string, isLoading: boolean) => void;
   resetActions: () => void;
 }
 
 export const useCommonStore = create<ICommonState>((set) => ({
   isLoadingApi: false,
+  isLoadingUpload: {},
   header: {
     title: "",
     actions: [],
@@ -58,6 +62,15 @@ export const useCommonStore = create<ICommonState>((set) => ({
     set((state) => ({
       ...state,
       header: { ...state.header, actions: [] },
+    }));
+  },
+  setLoading: (isLoading: boolean) => {
+    set((state) => ({ ...state, isLoadingApi: isLoading }));
+  },
+  setLoadingUpload: (key: string, isLoading: boolean) => {
+    set((state) => ({
+      ...state,
+      isLoadingUpload: { ...state.isLoadingUpload, [key]: isLoading },
     }));
   },
 }));

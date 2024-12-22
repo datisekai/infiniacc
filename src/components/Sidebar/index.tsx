@@ -13,7 +13,7 @@ const Sidebar = () => {
   const { pathname } = useLocation();
   const { changeView } = useChangeRoute();
   const { resetActions, setHeaderBack } = useCommonStore()
-  const { token } = useAuthStore()
+  const { token, user } = useAuthStore()
 
   useEffect(() => {
     resetActions()
@@ -31,7 +31,7 @@ const Sidebar = () => {
           <KeyVisual />
         </div>
       </div>
-      {token && <div className="py-4 border-b border-divide">
+      {token && Object.keys(user).length > 0 && <div className="py-4 border-b border-divide">
         <UserSidebar />
       </div>}
       <div className="mt-8 space-y-2 px-4">

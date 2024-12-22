@@ -6,8 +6,6 @@ import { MdOutlinePriceCheck } from "react-icons/md";
 import { AiFillGold } from "react-icons/ai";
 import { GiTargetDummy } from "react-icons/gi";
 
-export const BASE_URL = "";
-
 export const sidebarConfig = [
   {
     label: "Trang chủ",
@@ -50,3 +48,9 @@ export const exampleImages = [
   "/logo.webp",
   "/logo.webp",
 ];
+
+export const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+export * from "./local-key";
+export * from "./pathname";
