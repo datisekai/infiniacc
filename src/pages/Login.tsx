@@ -26,7 +26,6 @@ const Login = () => {
       //   toast.error("Đăng nhập thất bại")
       // }
     },
-    prompt: "select_account"
 
   });
 
