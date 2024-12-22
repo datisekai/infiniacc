@@ -7,15 +7,15 @@ const Profile = () => {
         <MaxWidthLayout padding={"16px 0px"}>
             <div className='flex flex-col gap-4 px-4'>
                 <div className='flex flex-col gap-2'>
-                    <span className='text-2xl text-gradient-primary'>Số điện thoại</span>
+                    <span className='text-lg md:text-2xl text-gradient-primary'>Số điện thoại</span>
                     <Input />
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <span className='text-2xl text-gradient-primary'>Số Zalo</span>
+                    <span className='text-lg md:text-2xl text-gradient-primary'>Số Zalo</span>
                     <Input />
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <span className='text-2xl text-gradient-primary'>Link Messenger</span>
+                    <span className='text-lg md:text-2xl text-gradient-primary'>Link Messenger</span>
                     <Input />
                 </div>
                 <div className='mt-8 flex justify-center'>

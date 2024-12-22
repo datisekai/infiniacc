@@ -1,5 +1,6 @@
 import BorderGradient from "../components/BorderGradient";
 import DragonBallCard from "../components/Cards/DragonBallCard";
+import { exampleImages } from "../constants";
 import MaxWidthLayout from "../layouts/MaxWidthLayout";
 
 const Home = () => {
@@ -13,19 +14,19 @@ const Home = () => {
             <p className="text-gray-400 text-sm">Phát triển bởi <a href="https://www.facebook.com/datlt.dev/" target="_blank" className="italic underline">Datisekai</a> & <a href="https://www.facebook.com/profile.php?id=100011379491596" target="_blank" className="italic underline">Duc Anh Nguyen</a></p>
           </div>
         </BorderGradient>
-        <DragonBallCard active={true} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} active={true} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
       </div>
     </MaxWidthLayout>
   );

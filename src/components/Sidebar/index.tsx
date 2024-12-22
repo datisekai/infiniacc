@@ -12,11 +12,12 @@ import { useAuthStore } from "../../stores/authStore";
 const Sidebar = () => {
   const { pathname } = useLocation();
   const { changeView } = useChangeRoute();
-  const { resetActions } = useCommonStore()
+  const { resetActions, setHeaderBack } = useCommonStore()
   const { token } = useAuthStore()
 
   useEffect(() => {
     resetActions()
+    setHeaderBack(false)
   }, [pathname])
 
   return (

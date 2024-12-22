@@ -1,8 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { useCommonStore } from "../stores/commonStore";
+import HeaderBack from "../components/HeaderBack";
 
 const DefaultLayout = () => {
+  const { header } = useCommonStore()
   return (
     <>
       <div className="flex">
@@ -11,8 +14,8 @@ const DefaultLayout = () => {
         </div>
 
         <div className="flex-1 min-h-screen flex flex-col">
-          <Header />
-          <div className="bg-dark flex-1 px-2 md:px-4 pt-4 pb-20 relative z-1 mt-[74px] md:ml-[250px]">
+          {header.headerBack ? <HeaderBack /> : <Header />}
+          <div className="bg-dark flex-1 px-2 md:px-4 pt-4 pb-20 relative z-1 md:ml-[250px]" style={{ marginTop: header.headerBack ? 54 : 74 }}>
             <Outlet />
           </div>
         </div>

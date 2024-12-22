@@ -9,6 +9,7 @@ import Profile from "../pages/Profile";
 import Wall from "../pages/Wall";
 import CreateAccount from "../pages/Account/CreateAccount";
 import EditAccount from "../pages/Account/EditAccount";
+import DetailPost from "../pages/DetailPost";
 
 const router = createBrowserRouter([
 
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: pathNames.editAccount,
                 element: <EditAccount />
+            },
+            {
+                path: pathNames.detailPost,
+                element: <DetailPost />
             }
         ],
     },

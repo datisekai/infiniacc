@@ -9,6 +9,7 @@ import BorderGradient from "../BorderGradient";
 import Menu from "../Menu";
 import useChangeRoute from "../../hooks/useChangeRoute";
 import { pathNames } from "../../constants/pathname";
+import GridImage from "../GridImage";
 
 
 
@@ -23,6 +24,7 @@ type Props = {
   // bong_tai?: string; //level_1, level_2, level_3
   // moc_quay?: string; //0k_5k, 5k_10k, 10k
   contact?: any
+  images?: string[]
 };
 const HomeCard: React.FC<Props> = ({ active = false, meta = {
   server: "3",
@@ -31,8 +33,12 @@ const HomeCard: React.FC<Props> = ({ active = false, meta = {
   de_tu: "Mabu",
   bong_tai: "Cấp 1",
   moc_quay: "10k",
-}, note = "Liên hệ ngay bằng cách ấn các nút bên dưới", price = 0, contact = '' }) => {
+}, note = "Liên hệ ngay bằng cách ấn các nút bên dưới", price = 0, contact = {}, images }) => {
   const { changeView } = useChangeRoute()
+
+  const handleGoDetail = () => {
+    changeView(pathNames.detailPost)
+  }
   return (
     <BorderGradient active={active} borderWidth={2}>
       <div className="pt-2 overflow-hidden ">
@@ -67,7 +73,7 @@ const HomeCard: React.FC<Props> = ({ active = false, meta = {
             </div>
           </div>
         </div>
-        <div className="px-4 text-sm mt-2">
+        <div className="px-4 text-sm mt-2" onClick={handleGoDetail}>
           <div>Giá: {formatCash(price)}</div>
           <div>Server: {meta?.server || ''}</div>
           <div>Hành tinh: {meta?.hanh_tinh || ''}</div>
@@ -77,12 +83,8 @@ const HomeCard: React.FC<Props> = ({ active = false, meta = {
           <div>Mốc quay thượng đế: {meta?.moc_quay || ''}</div>
           <div dangerouslySetInnerHTML={{ __html: note || '' }}></div>
         </div>
-        <div className="mt-2 ">
-          <LazyLoadImage
-            className="rounded block w-full h-full object-cover"
-            effect="blur"
-            src="https://www.chromethemer.com/google-backgrounds/dragon-ball/download/dragon-ball-google-chrome-background-0024.jpg"
-          />
+        <div className="mt-2 " onClick={handleGoDetail}>
+          <GridImage images={images || []} />
         </div>
         <div className="flex border-t border-divide items-center  overflow-hidden">
           {contact?.zalo && <div className="flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2">
@@ -97,10 +99,7 @@ const HomeCard: React.FC<Props> = ({ active = false, meta = {
             <FaFacebookMessenger />
             <span>Messenger</span>
           </div>}
-          {/* <div className="flex-1 flex items-center hover:opacity-70 transition-all justify-center gap-1 text-sm text-center hover:cursor-pointer py-2">
-            <MdReport />
-            <span>Báo cáo</span>
-          </div> */}
+
         </div>
       </div>
     </BorderGradient>

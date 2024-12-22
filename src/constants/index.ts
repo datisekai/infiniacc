@@ -40,3 +40,13 @@ export const sidebarConfig = [
     to: "https://www.shopbanvang.com/",
   },
 ];
+
+export const exampleImages = [
+  "/logo.webp",
+  "/logo.webp",
+  "/logo.webp",
+  "/logo.webp",
+  "/logo.webp",
+  "/logo.webp",
+  "/logo.webp",
+];

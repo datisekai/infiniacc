@@ -12,9 +12,11 @@ interface ICommonState {
   header: {
     title: string;
     actions: IAction[];
+    headerBack?: boolean;
   };
   setHeaderTitle: (title: string) => void;
   setHeaderActions: (actions: IAction[]) => void;
+  setHeaderBack: (headerBack: boolean) => void;
   resetActions: () => void;
 }
 
@@ -39,6 +41,15 @@ export const useCommonStore = create<ICommonState>((set) => ({
       header: {
         ...state.header,
         actions,
+      },
+    }));
+  },
+  setHeaderBack: (headerBack: boolean) => {
+    set((state) => ({
+      ...state,
+      header: {
+        ...state.header,
+        headerBack,
       },
     }));
   },

@@ -36,3 +36,10 @@ body {
 .dropdown-content .select-item:hover {
   background-color: #181c24 !important;
 }
+
+.show_more_img {
+  opacity: 1 !important;
+  img {
+    opacity: 0.5 !important;
+  }
+}

@@ -7,4 +7,5 @@ export const pathNames = {
   wall: "/profile/:username",
   createAccount: "/create-account",
   editAccount: "/edit-account/:id",
+  detailPost: "/post/:id",
 };
