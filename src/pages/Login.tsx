@@ -11,35 +11,46 @@ import Icon2 from "../assets/login/icon2.webp";
 import { useAuthStore } from "../stores/authStore";
 import { useGoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
 
 const Login = () => {
   const { changeView, backPreviousView } = useChangeRoute();
   const { login, token } = useAuthStore();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const loginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse);
-      // const result = await login(tokenResponse.);
-      // if (result) {
-      //   toast.success("Đăng nhập thành công")
-      // } else {
-      //   toast.error("Đăng nhập thất bại")
-      // }
+      const result = await login({ accessToken: tokenResponse.access_token });
+      if (result) {
+        toast.success("Đăng nhập thành công");
+      } else {
+        toast.error("Đăng nhập thất bại");
+      }
+      setIsLoading(false);
     },
-
+    onError: () => {
+      setIsLoading(false);
+      toast.error("Đăng nhập thất bại");
+    },
   });
 
   useEffect(() => {
     if (token) {
-      changeView(pathNames.home)
+      changeView(pathNames.home);
     }
-  }, [token])
+  }, [token]);
 
   const handleLogin = () => {
+    setIsLoading(true);
     loginGoogle();
-  }
+  };
   return (
-    <div className="bg-dark1">
+    <div className="bg-dark1 relative">
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.5)] z-10">
+          <Spinner />
+        </div>
+      )}
       <div className="w-full min-h-screen flex items-center justify-center px-4">
         <BorderGradient active={true}>
           <div className="p-8">
@@ -56,6 +67,7 @@ const Login = () => {
               <button
                 onClick={handleLogin}
                 className="warning-btn w-full"
+                disabled={isLoading}
               >
                 Đăng nhập với Google
               </button>

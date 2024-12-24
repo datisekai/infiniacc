@@ -10,7 +10,7 @@ import { localKey } from "../constants";
 interface IState {
   token: string;
   user: IUser;
-  login: (idToken: string) => Promise<boolean>;
+  login: (query: any) => Promise<boolean>;
   logout: () => void;
   getMe: () => Promise<void>;
 }
@@ -30,11 +30,11 @@ export interface IUser {
 export const useAuthStore = create<IState>((set) => ({
   token: getStringLocalData(localKey.TOKEN) || "",
   user: {} as IUser,
-  login: async (idToken) => {
+  login: async (query: any) => {
     try {
       const response = await processMiddlewareSendRequest({
         ...apiConfig.loginGoogle,
-        body: { idToken },
+        body: query,
       });
       set((state) => ({
         ...state,
