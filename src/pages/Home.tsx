@@ -1,9 +1,36 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { apiConfig, sendServerRequest } from "../apis";
 import BorderGradient from "../components/BorderGradient";
 import DragonBallCard from "../components/Cards/DragonBallCard";
-import { exampleImages } from "../constants";
 import MaxWidthLayout from "../layouts/MaxWidthLayout";
+import Spinner from "../components/Spinner";
 
 const Home = () => {
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['posts'],
+    initialPageParam: 1,
+    queryFn: ({ pageParam = 1 }) => sendServerRequest({
+      ...apiConfig.getPost, body: {
+        page: pageParam,
+        limit: 10
+      }
+    }),
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.page * lastPage.limit < lastPage.total) return lastPage.page + 1
+    },
+  })
+
+  const posts = useMemo(() => {
+    return data?.pages?.reduce((pre, cur) => {
+      return [...pre, ...cur?.data]
+    }, [])
+  }, [data])
   return (
     <MaxWidthLayout>
       <div className="space-y-2  animate-fade-down">
@@ -14,19 +41,18 @@ const Home = () => {
             <p className="text-gray-400 text-sm">Phát triển bởi <a href="https://www.facebook.com/datlt.dev/" target="_blank" className="italic underline">Datisekai</a> & <a href="https://www.facebook.com/profile.php?id=100011379491596" target="_blank" className="italic underline">Duc Anh Nguyen</a></p>
           </div>
         </BorderGradient>
-        <DragonBallCard images={exampleImages} active={true} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} active={true} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
-        <DragonBallCard images={exampleImages} contact={{ phone: "123", zalo: "123", messenger: "123" }} />
+        <InfiniteScroll
+          dataLength={posts?.length || 0} //This is important field to render the next data
+          next={fetchNextPage}
+          hasMore={hasNextPage}
+          loader={<div className="flex items-center justify-center mt-4"><Spinner /></div>}
+          scrollableTarget="scrollableDiv"
+          className="space-y-4"
+        >
+          {posts?.map((item: any) => <DragonBallCard key={item.id} {...item} active={true} contact={item?.user?.contact} />)}
+        </InfiniteScroll>
+
+
       </div>
     </MaxWidthLayout>
   );

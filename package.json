@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
     "@react-oauth/google": "^0.12.1",
     "@szhsin/react-menu": "^4.2.3",
     "@tanstack/react-query": "^5.62.8",
@@ -17,13 +18,16 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-fb-image-video-grid": "^0.1.10",
+    "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.4.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-lazy-load-image-component": "^1.6.3",
     "react-modern-drawer": "^1.4.0",
     "react-multi-select-component": "^4.3.4",
     "react-router-dom": "^7.0.2",
     "tailwindcss-animated": "^1.1.2",
+    "yup": "^1.6.1",
     "zustand": "^5.0.2"
   },
   "devDependencies": {

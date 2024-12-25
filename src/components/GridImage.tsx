@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { ImageGrid } from "react-fb-image-video-grid";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { getImageServer } from "../utils";
 
 type Props = {
     images?: string[]
@@ -15,7 +16,7 @@ const GridImage: React.FC<Props> = ({ images = [], showModal = false }) => {
         return (
             <img
                 style={{ objectFit: "cover" }}
-                src={c}
+                src={getImageServer(c || "")}
                 alt={c}
                 key={Math.random()}
             />

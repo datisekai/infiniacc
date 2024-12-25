@@ -47,11 +47,6 @@ export const planets = [
 
 export const skhs = [
   {
-    label: "Không có",
-    value: "",
-    icon: "",
-  },
-  {
     label: "Songoku",
     value: "songoku",
     icon: SkhSongoku,

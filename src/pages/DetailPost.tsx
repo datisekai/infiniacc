@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useCommonStore } from '../stores/commonStore'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { formatCash, getRandomAvatar } from '../utils'
+import { formatCash, getImageServer, getRandomAvatar } from '../utils'
 import Menu from '../components/Menu'
 import useChangeRoute from '../hooks/useChangeRoute'
 import { pathNames } from '../constants/pathname'
@@ -12,6 +12,9 @@ import { MdLocalPhone } from 'react-icons/md'
 import { FaFacebookMessenger } from 'react-icons/fa6'
 import { exampleImages } from '../constants'
 import MaxWidthLayout from '../layouts/MaxWidthLayout'
+import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'react-router-dom'
+import { apiConfig, sendServerRequest } from '../apis'
 
 const example: any = {
     active: false, meta: {
@@ -31,7 +34,12 @@ const DetailPost = () => {
         setHeaderBack(true)
     }, [])
 
-    const { active, meta, contact, note, price, images } = example;
+    const { id } = useParams()
+
+    const { data } = useQuery({ queryKey: ['post', id], queryFn: () => sendServerRequest({ ...apiConfig.getDetailPost, endpoint: apiConfig.getDetailPost.endpoint.replace(':id', id || "") }) })
+
+    console.log('data', data);
+    const { active, meta, user: { contact }, note, price, images } = data;
 
     const { changeView } = useChangeRoute()
     return (
@@ -47,8 +55,8 @@ const DetailPost = () => {
                         <div>
                             <div>Thành Đạt</div>
                             <div className="flex items-center gap-2 text-gray-400 text-sm">
-                                <span>Bài viết ưu tiên</span>
-                                <div className="px-1">|</div>
+                                {/* <span>Bài viết ưu tiên</span> */}
+                                {/* <div className="px-1">|</div> */}
                                 <span>5 phút</span>
                             </div>
                         </div>
@@ -80,8 +88,8 @@ const DetailPost = () => {
                 </div>
                 <div className="mt-2 ">
                     {images?.map((item: string, index: number) => {
-                        return <div>
-                            <LazyLoadImage src={item} key={index} effect='blur' />
+                        return <div key={index}>
+                            <LazyLoadImage src={getImageServer(item)} key={index} effect='blur' />
                             <div className="flex border-t border-divide items-center  overflow-hidden">
                                 {contact?.zalo && <div className="flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2">
                                     <IoIosSend />

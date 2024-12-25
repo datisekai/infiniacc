@@ -13,6 +13,8 @@ interface IState {
   login: (query: any) => Promise<boolean>;
   logout: () => void;
   getMe: () => Promise<void>;
+  setUser: (user: IUser) => void;
+  usedTurn: () => void;
 }
 
 export interface IUser {
@@ -20,11 +22,18 @@ export interface IUser {
   updatedAt: string;
   id: string;
   email: string;
+  username: any;
+  coin: number;
+  avatar: string;
+  note: any;
   role: string;
   contact: any;
   active: boolean;
   name: string;
-  avatar?: string;
+  turn: {
+    available: number;
+    total: number;
+  };
 }
 
 export const useAuthStore = create<IState>((set) => ({
@@ -59,5 +68,23 @@ export const useAuthStore = create<IState>((set) => ({
         user: response.user,
       }));
     } catch (error) {}
+  },
+  setUser: (user: IUser) => {
+    set((state) => ({
+      ...state,
+      user: { ...state.user, ...user },
+    }));
+  },
+  usedTurn: () => {
+    set((state) => ({
+      ...state,
+      user: {
+        ...state.user,
+        turn: {
+          available: state.user.turn.available - 1,
+          total: state.user.turn.total,
+        },
+      },
+    }));
   },
 }));
