@@ -68,7 +68,7 @@ const DetailPost = () => {
   return (
     <MaxWidthLayout>
       <div className="pt-2 overflow-hidden ">
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <LazyLoadImage
             effect="blur"
             src={avatar ? getImageServer(avatar) : getRandomAvatar(name)}
