@@ -7,9 +7,11 @@ import { GoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
 import { useAuthStore } from "../stores/authStore";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import useChangeRoute from "../hooks/useChangeRoute";
+import { pathNames } from "../constants";
 
 const DefaultLayout = () => {
-  const { header, setQuery } = useCommonStore();
+  const { header, setQuery, setHeaderActions } = useCommonStore();
   const { token, login, getMe } = useAuthStore();
   const [searchParams, setSearchParams] = useSearchParams();
 

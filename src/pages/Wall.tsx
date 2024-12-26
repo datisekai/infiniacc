@@ -17,19 +17,9 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getImageServer, translateQuery } from "../utils";
 
 const Wall = () => {
-  const { setHeaderActions, query } = useCommonStore();
+  const { query } = useCommonStore();
   const { changeView } = useChangeRoute();
   const { user } = useAuthStore();
-
-  useEffect(() => {
-    setHeaderActions([
-      {
-        title: "Đăng nick",
-        variant: "success",
-        onClick: () => changeView(pathNames.createAccount),
-      },
-    ]);
-  }, []);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["post-me", user?.id, query],
