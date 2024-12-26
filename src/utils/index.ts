@@ -40,7 +40,7 @@ export const getIndex = (index: number, rowPerPage: number, page: number) => {
 };
 
 export function getImageServer(url: string) {
-  if (url.includes("uploads/")) return `${BASE_URL}/${url}`;
+  if (url?.includes("uploads/")) return `${BASE_URL}/${url}`;
   return url;
 }
 
@@ -131,3 +131,68 @@ export function time_ago(time: any) {
     }
   return time;
 }
+
+export const parsePriceRange = (
+  value: string
+): { priceFrom: number; priceTo?: number } => {
+  const payload: { priceFrom: number; priceTo?: number } = { priceFrom: 0 };
+
+  switch (value) {
+    case "duoi-200k":
+      payload.priceFrom = 0;
+      payload.priceTo = 200000;
+      break;
+    case "200k-500k":
+      payload.priceFrom = 200000;
+      payload.priceTo = 500000;
+      break;
+    case "500k-1tr":
+      payload.priceFrom = 500000;
+      payload.priceTo = 1000000;
+      break;
+    case "tren-1tr":
+      payload.priceFrom = 1000000;
+      break;
+    default:
+      throw new Error("Invalid price range value");
+  }
+
+  return payload;
+};
+
+export const getPriceRangeValue = (priceFrom: number, priceTo?: number) => {
+  if (priceFrom === 0 && priceTo === 200000) {
+    return "duoi-200k";
+  }
+  if (priceFrom === 200000 && priceTo === 500000) {
+    return "200k-500k";
+  }
+  if (priceFrom === 500000 && priceTo === 1000000) {
+    return "500k-1tr";
+  }
+  if (priceFrom === 1000000 && priceTo === undefined) {
+    return "tren-1tr";
+  }
+
+  if ((priceFrom = 0 && priceTo == 0)) return "";
+};
+
+export const translateQuery = (query: any) => {
+  const newQuery: any = {};
+  for (const key in query) {
+    if (
+      typeof query[key] === "object" &&
+      query[key] &&
+      query[key]?.length > 0
+    ) {
+      newQuery[key] = query[key]?.join(",");
+    }
+    if (
+      (typeof query[key] === "string" || typeof query[key] === "number") &&
+      query[key]
+    ) {
+      newQuery[key] = query[key];
+    }
+  }
+  return newQuery;
+};

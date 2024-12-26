@@ -1,14 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { pathNames } from "../constants/pathname";
+import { useCommonStore } from "../stores/commonStore";
 
 const useChangeRoute = () => {
   const navigate = useNavigate();
+  const { setQuery } = useCommonStore();
 
   const changeView = (path: string) => {
     if (path.includes("http://") || path.includes("https://")) {
       return window.open(path, "_blank");
     }
+
+    setQuery({});
 
     return navigate(path);
   };

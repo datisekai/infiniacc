@@ -15,12 +15,14 @@ interface ICommonState {
     actions: IAction[];
     headerBack?: boolean;
   };
+  query?: any;
   setHeaderTitle: (title: string) => void;
   setHeaderActions: (actions: IAction[]) => void;
   setHeaderBack: (headerBack: boolean) => void;
   setLoading: (isLoading: boolean) => void;
   setLoadingUpload: (key: string, isLoading: boolean) => void;
   resetActions: () => void;
+  setQuery: (query: any) => void;
 }
 
 export const useCommonStore = create<ICommonState>((set) => ({
@@ -29,6 +31,13 @@ export const useCommonStore = create<ICommonState>((set) => ({
   header: {
     title: "",
     actions: [],
+  },
+  query: {},
+  setQuery: (query: any) => {
+    set((state) => ({
+      ...state,
+      query,
+    }));
   },
   setHeaderTitle: (title: string) => {
     set((state) => ({

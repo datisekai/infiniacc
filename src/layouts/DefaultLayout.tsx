@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { useCommonStore } from "../stores/commonStore";
@@ -9,8 +9,18 @@ import toast from "react-hot-toast";
 import { useEffect } from "react";
 
 const DefaultLayout = () => {
-  const { header } = useCommonStore();
+  const { header, setQuery } = useCommonStore();
   const { token, login, getMe } = useAuthStore();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const params: any = {};
+    searchParams.forEach((value, key) => {
+      params[key] = value;
+    });
+
+    setQuery(params);
+  }, []);
 
   const handleLogin = async (idToken: string) => {
     const result = await login({ idToken });
