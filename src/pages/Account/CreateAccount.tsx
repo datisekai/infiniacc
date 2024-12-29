@@ -23,7 +23,7 @@ const schema = yup
     price: yup.number().required("Quên nhập giá nè bro."),
     server: yup.string().required("Quên nhập server nè bro."),
     hanh_tinh: yup.string().required("Quên nhập hành tinh nè bro."),
-    bong_tai: yup.array().min(1, "Quên chọn bông tai nè bro."),
+    bong_tai: yup.array(),
     moc_quay: yup.string().required("Quên nhập mốc quay nè bro."),
     de_tu: yup.string().required("Quên nhập đệ tử nè bro."),
     set_kich_hoat: yup.array().min(1, "Quên chọn set kich hoat nè bro."),
@@ -66,7 +66,7 @@ const CreateAccount = () => {
       });
     },
     onSuccess(data, variables, context) {
-      changeView(pathNames.wall);
+      changeView(pathNames.wall.replace(':username', user.username || user.id));
       toast.success("Đăng nick thành công.");
       usedTurn();
     },
@@ -107,8 +107,8 @@ const CreateAccount = () => {
           <span className="text-gradient-primary text-xl">Hình ảnh</span>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              {images?.map((item) => (
-                <LazyLoadImage src={getImageServer(item)} className="h-28" />
+              {images?.map((item, index) => (
+                <LazyLoadImage key={index} src={getImageServer(item)} className="h-28" />
               ))}
             </div>
             {images.length < 5 && (

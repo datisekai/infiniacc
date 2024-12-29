@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Kanit", serif;
+  color: white;
+}
+
+select option {
+  background: #131720 !important;
+  color: #fff !important;
+}
+
+.dropdown-container {
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.dropdown-content,
+.panel-content,
+.select-panel {
+  background-color: #131720 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.dropdown-content {
+  input {
+    background-color: #131720 !important;
+  }
+
+  .select-item:hover {
+    background-color: #181c24 !important;
+  }
+}
+
+.show_more_img {
+  opacity: 1 !important;
+
+  img {
+    opacity: 0.5 !important;
+  }
+}
+
+.multiSelectContainer {
+  .searchWrapper {
+    border-radius: 24px;
+    border: none;
+    padding: 9px 16px;
+    input {
+      margin-top: 0px !important;
+      &::placeholder {
+        color: white !important;
+      }
+    }
+  }
+
+  .optionListContainer {
+    background-color: #131720 !important;
+
+    .highlightOption {
+      @apply text-primary;
+      background: #13151c;
+    }
+
+    li {
+      padding-left: 16px !important;
+    }
+  }
+
+  ul {
+    border-radius: 24px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
+  .chip {
+    background: linear-gradient(
+      90deg,
+      rgb(24, 27, 35) 0%,
+      rgb(36, 40, 53) 100%
+    ) !important;
+  }
+}
+
+.confirm-overlay {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}

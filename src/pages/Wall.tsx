@@ -10,16 +10,18 @@ import useChangeRoute from "../hooks/useChangeRoute";
 import { pathNames } from "../constants/pathname";
 import { useAuthStore } from "../stores/authStore";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiConfig, sendServerRequest } from "../apis";
 import Spinner from "../components/Spinner";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getImageServer, translateQuery } from "../utils";
+import toast from "react-hot-toast";
 
 const Wall = () => {
   const { query } = useCommonStore();
-  const { changeView } = useChangeRoute();
   const { user } = useAuthStore();
+  const { changeView } = useChangeRoute()
+  const queryClient = useQueryClient()
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["post-me", user?.id, query],
@@ -39,6 +41,32 @@ const Wall = () => {
         return lastPage.page + 1;
     },
   });
+
+  const { mutate } = useMutation({
+    mutationFn: (id: string) => {
+      return sendServerRequest({
+        ...apiConfig.deletePost,
+        endpoint: apiConfig.deletePost.endpoint.replace(":id", id || ""),
+      });
+    },
+    onSuccess(id, variables) {
+      toast.success("Xoá bài đăng thành công.")
+      queryClient.setQueryData(["posts", query], (oldData: any) => {
+        if (!oldData) return oldData;
+
+        const newPages = oldData.pages.map((page: any) => ({
+          ...page,
+          data: page.data.filter((item: any) => item.id != variables),
+        }));
+
+        return { ...oldData, pages: newPages };
+      });
+    },
+    onError(error) {
+      console.log(error);
+      toast.error("Có lỗi xảy ra, hãy thử lại sau.")
+    }
+  })
 
   const posts = useMemo(() => {
     return data?.pages?.reduce((pre, cur) => {
@@ -64,28 +92,29 @@ const Wall = () => {
                 Giới thiệu
               </h2>
               <div
-                dangerouslySetInnerHTML={{ __html: "Admin group 123" }}
+                className="text-gradient-primary"
+                dangerouslySetInnerHTML={{ __html: user?.note || "---" }}
               ></div>
               <div className="flex justify-center items-center gap-2">
                 <MdLocalPhone />
-                <span>Số điện thoại: {user?.contact?.phone || "---"}</span>
+                <span>Số điện thoại: <span className="text-gradient-primary">{user?.contact?.phone || "---"}</span></span>
               </div>
               <div className="flex justify-center items-center gap-2">
                 <IoIosSend />
-                <span>Số Zalo: {user?.contact?.zalo || "---"}</span>
+                <span>Số Zalo: <span className="text-gradient-primary">{user?.contact?.zalo || "---"}</span></span>
               </div>
               <div className="flex justify-center items-center gap-2">
                 {" "}
                 <FaFacebookMessenger />{" "}
                 <span>
                   Link Messenger:{" "}
-                  {user?.contact?.messenger ? (
+                  <span className="text-gradient-primary">{user?.contact?.messenger ? (
                     <a href={user?.contact?.messenger} target="_blank">
                       Nhắn tin
                     </a>
                   ) : (
                     "---"
-                  )}
+                  )}</span>
                 </span>
               </div>
             </div>
@@ -112,10 +141,12 @@ const Wall = () => {
               {...item}
               active={true}
               contact={item?.user?.contact}
+              handleDelete={(id) => mutate(id)}
             />
           ))}
           {posts?.length == 0 && (
-            <p className="text-center mt-10 text-lg">Chưa có bài viết nào.</p>
+            <div className="flex flex-col justify-center items-center gap-2"> <p className="text-center mt-10 text-lg">Chưa có bài viết nào. </p>
+              <button className="warning-btn" onClick={() => changeView(pathNames.createAccount)}>Đăng nick ngay</button></div>
           )}
         </InfiniteScroll>
       </div>

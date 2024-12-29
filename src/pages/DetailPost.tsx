@@ -21,6 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { apiConfig, sendServerRequest } from "../apis";
 import { get } from "react-hook-form";
+import { translateBongTai, translateDeTu, translateMocQuay } from "../components/Cards/const";
 
 const example: any = {
   active: false,
@@ -62,6 +63,7 @@ const DetailPost = () => {
     price,
     images,
     createdAt,
+    user
   } = data;
 
   const { changeView } = useChangeRoute();
@@ -76,7 +78,7 @@ const DetailPost = () => {
           />
           <div className="flex items-center justify-between w-full">
             <div>
-              <div>Thành Đạt</div>
+              <div>{user?.name || user?.nickname}</div>
               <div className="flex items-center gap-2 text-gray-400 text-sm">
                 {/* <span>Bài viết ưu tiên</span> */}
                 {/* <div className="px-1">|</div> */}
@@ -93,17 +95,17 @@ const DetailPost = () => {
                 options={[
                   {
                     label: "Báo cáo",
-                    onClick: () => {},
+                    onClick: () => { },
                   },
                   {
                     label: "Chỉnh sửa",
                     onClick: () => {
-                      changeView(pathNames.editAccount);
+                      changeView(pathNames.editAccount.replace(':id', id || ''));
                     },
                   },
                   {
                     label: "Xoá",
-                    onClick: () => {},
+                    onClick: () => { },
                   },
                 ]}
               />
@@ -111,14 +113,14 @@ const DetailPost = () => {
           </div>
         </div>
         <div className=" text-sm mt-2">
-          <div>Giá: {formatCash(price)}</div>
-          <div>Server: {meta?.server || ""}</div>
-          <div>Hành tinh: {meta?.hanh_tinh || ""}</div>
-          <div>Sét kích hoạt: {meta?.set_kich_hoat || ""}</div>
-          <div>Đệ tử: {meta?.de_tu || ""}</div>
-          <div>Bông tai: {meta?.bong_tai || ""}</div>
-          <div>Mốc quay thượng đế: {meta?.moc_quay || ""}</div>
-          <div dangerouslySetInnerHTML={{ __html: note || "" }}></div>
+          <div>Giá: <span className="uppercase text-gradient-secondary">{formatCash(price)}</span></div>
+          <div>Server: <span className="uppercase text-gradient-secondary">{meta?.server || "--"}</span></div>
+          <div>Hành tinh: <span className="uppercase text-gradient-secondary">{meta?.hanh_tinh || "--"}</span></div>
+          <div>Sét kích hoạt: <span className="uppercase text-gradient-secondary">{meta?.set_kich_hoat || "--"}</span></div>
+          <div>Đệ tử: <span className="uppercase text-gradient-secondary">{translateDeTu(meta?.de_tu)}</span></div>
+          <div>Bông tai: <span className="uppercase text-gradient-secondary">{translateBongTai(meta?.bong_tai)}</span></div>
+          <div>Mốc quay thượng đế: <span className="uppercase text-gradient-secondary">{translateMocQuay(meta?.moc_quay)}</span></div>
+          {note && <div dangerouslySetInnerHTML={{ __html: note || "--" }}></div>}
         </div>
         <div className="mt-2 ">
           {images?.map((item: string, index: number) => {

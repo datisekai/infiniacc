@@ -23,6 +23,10 @@ export const apiConfig = {
     method: "PUT",
     endpoint: "/api.post/:id",
   },
+  deletePost: {
+    method: "DELETE",
+    endpoint: "/api.post/:id",
+  },
   getPost: {
     method: "GET",
     endpoint: "/api.post",

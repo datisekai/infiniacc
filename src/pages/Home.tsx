@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { apiConfig, sendServerRequest } from "../apis";
@@ -8,11 +8,16 @@ import MaxWidthLayout from "../layouts/MaxWidthLayout";
 import Spinner from "../components/Spinner";
 import { useCommonStore } from "../stores/commonStore";
 import { translateQuery } from "../utils";
+import toast from "react-hot-toast";
+import { pathNames } from "../constants";
+import useChangeRoute from "../hooks/useChangeRoute";
 
 const Home = () => {
   const { query } = useCommonStore();
+  const queryClient = useQueryClient()
+  const { changeView } = useChangeRoute()
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery({
     queryKey: ["posts", query],
     initialPageParam: 1,
     queryFn: ({ pageParam = 1 }) =>
@@ -30,11 +35,42 @@ const Home = () => {
     },
   });
 
+  const { mutate } = useMutation({
+    mutationFn: (id: string) => {
+      return sendServerRequest({
+        ...apiConfig.deletePost,
+        endpoint: apiConfig.deletePost.endpoint.replace(":id", id || ""),
+      });
+    },
+    onSuccess(id, variables) {
+      console.log('id', id, variables);
+      toast.success("Xoá bài đăng thành công.")
+      queryClient.setQueryData(["posts", query], (oldData: any) => {
+        if (!oldData) return oldData;
+
+        const newPages = oldData.pages.map((page: any) => ({
+          ...page,
+          data: page.data.filter((item: any) => item.id != variables),
+        }));
+
+        return { ...oldData, pages: newPages };
+      });
+    },
+    onError(error) {
+      console.log(error);
+      toast.error("Có lỗi xảy ra, hãy thử lại sau.")
+    }
+  })
+
   const posts = useMemo(() => {
     return data?.pages?.reduce((pre, cur) => {
       return [...pre, ...cur?.data];
     }, []);
   }, [data]);
+
+  const handleDelete = (id: string) => {
+    mutate(id);
+  }
   return (
     <MaxWidthLayout>
       <div className="space-y-2  animate-fade-down">
@@ -86,10 +122,12 @@ const Home = () => {
               {...item}
               active={true}
               contact={item?.user?.contact}
+              handleDelete={handleDelete}
             />
           ))}
           {posts?.length == 0 && (
-            <p className="text-center mt-10 text-lg">Chưa có bài viết nào.</p>
+            <div className="flex flex-col justify-center items-center gap-2"> <p className="text-center mt-10 text-lg">Chưa có bài viết nào. </p>
+              <button className="warning-btn" onClick={() => changeView(pathNames.createAccount)}>Đăng nick ngay</button></div>
           )}
         </InfiniteScroll>
       </div>

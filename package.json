@@ -16,7 +16,9 @@
     "@szhsin/react-menu": "^4.2.3",
     "@tanstack/react-query": "^5.62.8",
     "axios": "^1.7.9",
+    "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.3.1",
+    "react-confirm-alert": "^3.0.6",
     "react-dom": "^18.3.1",
     "react-fb-image-video-grid": "^0.1.10",
     "react-hook-form": "^7.54.2",
@@ -27,6 +29,7 @@
     "react-modern-drawer": "^1.4.0",
     "react-multi-select-component": "^4.3.4",
     "react-router-dom": "^7.0.2",
+    "sass": "^1.83.0",
     "tailwindcss-animated": "^1.1.2",
     "yup": "^1.6.1",
     "zustand": "^5.0.2"

@@ -13,7 +13,12 @@ export const sidebarConfig = [
     to: pathNames.home,
   },
   {
-    label: "Nick của tôi",
+    label: "Mua vàng",
+    icon: AiFillGold,
+    to: "https://www.shopbanvang.com/",
+  },
+  {
+    label: "Quản lý nick",
     icon: GiTargetDummy,
     to: pathNames.wall,
   },
@@ -31,11 +36,6 @@ export const sidebarConfig = [
     label: "Bảng giá",
     icon: MdOutlinePriceCheck,
     to: pathNames.pricing,
-  },
-  {
-    label: "Mua vàng",
-    icon: AiFillGold,
-    to: "https://www.shopbanvang.com/",
   },
 ];
 

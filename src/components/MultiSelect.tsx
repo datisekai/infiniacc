@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import BorderGradient from './BorderGradient'
-import { MultiSelect as MultiSelectReact } from "react-multi-select-component";
+import Multiselect from 'multiselect-react-dropdown';
 import { Controller } from 'react-hook-form';
 
 type Props = {
@@ -13,6 +13,9 @@ type Props = {
     name: string
 }
 const MultiSelect: React.FC<Props> = ({ options = [], control, name, errors, placeholder = "Vui lòng chọn" }) => {
+    const selectOptions = useMemo(() => {
+        return options.map(item => ({ id: item.value, label: item.label }))
+    }, [options])
     return (
         <div>
             <Controller
@@ -20,14 +23,7 @@ const MultiSelect: React.FC<Props> = ({ options = [], control, name, errors, pla
                 name={name}
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                     <BorderGradient focus={true} borderRadius={24} hover={true}>
-                        <MultiSelectReact
-                            disableSearch={true}
-                            options={options as any}
-                            value={value as any}
-                            onChange={onChange}
-                            labelledBy={placeholder}
-
-                        />
+                        <Multiselect onSelect={onChange} onRemove={onChange} selectedValues={value} options={options} placeholder={placeholder} displayValue='label' />
                     </BorderGradient>
                 )}
             />
@@ -37,4 +33,4 @@ const MultiSelect: React.FC<Props> = ({ options = [], control, name, errors, pla
     )
 }
 
-export default MultiSelect
+export default React.memo(MultiSelect)
