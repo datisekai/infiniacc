@@ -83,7 +83,7 @@ const Home = () => {
               Chào mừng bạn đến với{" "}
               <span className="text-gradient-primary">Infiniacc</span>
             </h2>
-            <p>Đây là nơi trao đổi & tìm kiếm nick dễ dàng</p>
+            <p>Sàn giao dịch acc game an toàn và tiện lợi nhất.</p>
             <p className="text-gray-400 text-sm">
               Phát triển bởi{" "}
               <a
