@@ -1,15 +1,16 @@
 import { createBrowserRouter, redirect, RouteObject } from "react-router-dom";
 import { pathNames } from "../constants/pathname";
-import Login from "../pages/Login";
 import DefaultLayout from "../layouts/DefaultLayout";
-import Home from "../pages/Home";
-import Pricing from "../pages/Pricing";
-import Deposit from "../pages/Deposit";
-import Profile from "../pages/Profile";
-import Wall from "../pages/Wall";
 import CreateAccount from "../pages/Account/CreateAccount";
 import EditAccount from "../pages/Account/EditAccount";
+import Deposit from "../pages/Deposit";
 import DetailPost from "../pages/DetailPost";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Pricing from "../pages/Pricing";
+import Profile from "../pages/Profile";
+import Wall from "../pages/Wall";
+import AuthLayout from "../layouts/AuthLayout";
 
 const router = createBrowserRouter([
 
@@ -35,19 +36,19 @@ const router = createBrowserRouter([
             },
             {
                 path: pathNames.profile,
-                element: <Profile />
+                element: <AuthLayout><Profile /></AuthLayout>
             },
             {
                 path: pathNames.wall,
-                element: <Wall />
+                element: <AuthLayout><Wall /></AuthLayout>
             },
             {
                 path: pathNames.createAccount,
-                element: <CreateAccount />
+                element: <AuthLayout><CreateAccount /></AuthLayout>
             },
             {
                 path: pathNames.editAccount,
-                element: <EditAccount />
+                element: <AuthLayout><EditAccount /></AuthLayout>
             },
             {
                 path: pathNames.detailPost,
