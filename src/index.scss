@@ -97,7 +97,20 @@ select option {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .popup-content {
+  animation: slideDown 0.7s ease-out forwards;
+  -webkit-animation: slideDown 0.7s ease-out forwards;
   padding: 0px !important;
   border-radius: 24px !important;
   border: none !important;
