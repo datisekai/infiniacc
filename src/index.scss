@@ -96,3 +96,14 @@ select option {
 .confirm-overlay {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
+
+.popup-content {
+  padding: 0px !important;
+  border-radius: 24px !important;
+  border: none !important;
+  background-color: transparent !important;
+
+  @media screen and (max-width: 768px) {
+    width: 90% !important;
+  }
+}

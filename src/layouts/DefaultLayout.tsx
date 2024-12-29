@@ -1,14 +1,13 @@
+import { GoogleLogin } from "@react-oauth/google";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { Outlet, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import { useCommonStore } from "../stores/commonStore";
 import HeaderBack from "../components/HeaderBack";
-import { GoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
+import PopupInit from "../components/PopupInit";
+import Sidebar from "../components/Sidebar";
 import { useAuthStore } from "../stores/authStore";
-import toast from "react-hot-toast";
-import { useEffect } from "react";
-import useChangeRoute from "../hooks/useChangeRoute";
-import { pathNames } from "../constants";
+import { useCommonStore } from "../stores/commonStore";
 
 const DefaultLayout = () => {
   const { header, setQuery, setHeaderActions } = useCommonStore();
@@ -68,6 +67,7 @@ const DefaultLayout = () => {
           useOneTap
         />
       )}
+      <PopupInit />
     </>
   );
 };

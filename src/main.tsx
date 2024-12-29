@@ -9,6 +9,7 @@ import { GOOGLE_CLIENT_ID } from "./constants/index.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import 'reactjs-popup/dist/index.css';
 
 const queryClient = new QueryClient();
 
