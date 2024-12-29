@@ -11,7 +11,7 @@ const PopupInit = () => {
                 <div className="p-4">
                     <div
                     >
-                        <h1 className="text-lg md:text-xl text-center text-gradient-secondary">
+                        <h1 className="text-lg uppercase md:text-xl text-center text-gradient-secondary">
                             🎉 Chào mừng bạn đến với <span className="text-gradient-primary">Infiniacc</span>
                         </h1>
                         <h2 className="text-center text-sm md:text-base">
