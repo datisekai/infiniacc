@@ -37,7 +37,7 @@ type Props = {
   user?: any;
   id?: string;
   createdAt?: string;
-  handleDelete?: (id: string) => void
+  handleDelete?: (id: string) => void;
 };
 const HomeCard: React.FC<Props> = ({
   active = false,
@@ -49,10 +49,10 @@ const HomeCard: React.FC<Props> = ({
   user,
   id,
   createdAt,
-  handleDelete
+  handleDelete,
 }) => {
   const { changeView } = useChangeRoute();
-  const { confirm } = useConfirm()
+  const { confirm } = useConfirm();
 
   const { user: currentUser } = useAuthStore();
 
@@ -60,14 +60,13 @@ const HomeCard: React.FC<Props> = ({
     changeView(pathNames.detailPost.replace(":id", id || ""));
   };
 
-
   const options = useMemo(() => {
     if (user.id === currentUser.id) {
       return [
         {
           label: "Chỉnh sửa",
           onClick: () => {
-            changeView(pathNames.editAccount.replace(':id', id || ''));
+            changeView(pathNames.editAccount.replace(":id", id || ""));
           },
         },
         {
@@ -75,10 +74,10 @@ const HomeCard: React.FC<Props> = ({
           onClick: () => {
             confirm({
               onAccept() {
-                console.log('called');
-                return handleDelete && handleDelete(id || "")
+                console.log("called");
+                return handleDelete && handleDelete(id || "");
               },
-            })
+            });
           },
         },
       ];
@@ -105,7 +104,7 @@ const HomeCard: React.FC<Props> = ({
           />
           <div className="flex items-center justify-between w-full">
             <div>
-              <div>{user?.name || user?.nickname}</div>
+              <div>{user?.username || user?.name}</div>
               <div className="flex items-center gap-2 text-gray-400 text-sm">
                 {/* <span>Bài viết ưu tiên</span> */}
                 {/* <div className="px-1">|</div> */}
@@ -113,26 +112,65 @@ const HomeCard: React.FC<Props> = ({
               </div>
             </div>
             <div>
-              {options && options.length > 0 && <Menu
-                button={
-                  <div className="p-1 flex items-center">
-                    <BsThreeDots />
-                  </div>
-                }
-                options={options}
-              />}
+              {options && options.length > 0 && (
+                <Menu
+                  button={
+                    <div className="p-1 flex items-center">
+                      <BsThreeDots />
+                    </div>
+                  }
+                  options={options}
+                />
+              )}
             </div>
           </div>
         </div>
         <div className="px-4 text-sm mt-2" onClick={handleGoDetail}>
-          <div>Giá: <span className="uppercase text-gradient-secondary">{formatCash(price)}</span></div>
-          <div>Server: <span className="uppercase text-gradient-secondary">{meta?.server || "--"}</span></div>
-          <div>Hành tinh: <span className="uppercase text-gradient-secondary">{meta?.hanh_tinh || "--"}</span></div>
-          <div>Sét kích hoạt: <span className="uppercase text-gradient-secondary">{meta?.set_kich_hoat || "--"}</span></div>
-          <div>Đệ tử: <span className="uppercase text-gradient-secondary">{translateDeTu(meta?.de_tu)}</span></div>
-          <div>Bông tai: <span className="uppercase text-gradient-secondary">{translateBongTai(meta?.bong_tai)}</span></div>
-          <div>Mốc quay thượng đế: <span className="uppercase text-gradient-secondary">{translateMocQuay(meta?.moc_quay)}</span></div>
-          {note && <div dangerouslySetInnerHTML={{ __html: note || "--" }}></div>}
+          <div>
+            Giá:{" "}
+            <span className="uppercase text-gradient-secondary">
+              {formatCash(price)}
+            </span>
+          </div>
+          <div>
+            Server:{" "}
+            <span className="uppercase text-gradient-secondary">
+              {meta?.server || "--"}
+            </span>
+          </div>
+          <div>
+            Hành tinh:{" "}
+            <span className="uppercase text-gradient-secondary">
+              {meta?.hanh_tinh || "--"}
+            </span>
+          </div>
+          <div>
+            Sét kích hoạt:{" "}
+            <span className="uppercase text-gradient-secondary">
+              {meta?.set_kich_hoat || "--"}
+            </span>
+          </div>
+          <div>
+            Đệ tử:{" "}
+            <span className="uppercase text-gradient-secondary">
+              {translateDeTu(meta?.de_tu)}
+            </span>
+          </div>
+          <div>
+            Bông tai:{" "}
+            <span className="uppercase text-gradient-secondary">
+              {translateBongTai(meta?.bong_tai)}
+            </span>
+          </div>
+          <div>
+            Mốc quay thượng đế:{" "}
+            <span className="uppercase text-gradient-secondary">
+              {translateMocQuay(meta?.moc_quay)}
+            </span>
+          </div>
+          {note && (
+            <div dangerouslySetInnerHTML={{ __html: note || "--" }}></div>
+          )}
         </div>
         <div className="mt-2 " onClick={handleGoDetail}>
           <GridImage images={images || []} />
