@@ -140,7 +140,7 @@ const HomeCard: React.FC<Props> = ({
           </div>
           <div>
             Hành tinh:{" "}
-            <span className="uppercase text-gradient-secondary font-semibold">
+            <span className="uppercase text-gradient-secondary font-bold">
               {meta?.hanh_tinh || "--"}
             </span>
           </div>
