@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import useChangeRoute from "../../hooks/useChangeRoute";
 import { pathNames } from "../../constants";
 import { useAuthStore } from "../../stores/authStore";
+import { IoCloseOutline } from "react-icons/io5";
 
 const schema = yup
   .object()
@@ -108,11 +109,24 @@ const CreateAccount = () => {
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               {images?.map((item, index) => (
-                <LazyLoadImage
-                  key={index}
-                  src={getImageServer(item)}
-                  className="h-28"
-                />
+                <div className="relative">
+                  <LazyLoadImage
+                    key={index}
+                    src={getImageServer(item)}
+                    className="h-28"
+                  />
+                  <div
+                    onClick={() =>
+                      setValue(
+                        "images",
+                        images.filter((i) => i !== item)
+                      )
+                    }
+                    className="absolute top-1 right-1 border rounded-full bg-dark1 cursor-pointer hover:opacity-55"
+                  >
+                    <IoCloseOutline className="text-xl" />
+                  </div>
+                </div>
               ))}
             </div>
             {images.length < 5 && (
