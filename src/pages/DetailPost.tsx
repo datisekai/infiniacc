@@ -182,19 +182,37 @@ const DetailPost = () => {
                 />
                 <div className="flex border-t border-divide items-center  overflow-hidden">
                   {contact?.zalo && (
-                    <div className="flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2">
+                    <div
+                      onClick={() => {
+                        window.open(
+                          `https://zalo.me/${contact?.zalo}`,
+                          "_blank"
+                        );
+                      }}
+                      className="flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2"
+                    >
                       <IoIosSend />
                       <span>Zalo</span>
                     </div>
                   )}
                   {contact?.phone && (
-                    <div className=" flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2">
+                    <div
+                      onClick={() => {
+                        window.open(`tel:${contact?.phone}`, "_blank");
+                      }}
+                      className=" flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2"
+                    >
                       <MdLocalPhone />
                       <span>Điện thoại</span>
                     </div>
                   )}
                   {contact?.messenger && (
-                    <div className=" flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2">
+                    <div
+                      onClick={() => {
+                        window.open(contact.messenger, "_blank");
+                      }}
+                      className=" flex-1 flex items-center hover:opacity-70 transition-all  justify-center gap-1 text-sm text-center hover:cursor-pointer py-2"
+                    >
                       <FaFacebookMessenger />
                       <span>Messenger</span>
                     </div>
