@@ -23,7 +23,7 @@ const schema = yup
     price: yup.number().required("Quên nhập giá nè bro."),
     server: yup.string().required("Quên nhập server nè bro."),
     hanh_tinh: yup.string().required("Quên nhập hành tinh nè bro."),
-    bong_tai: yup.array(),
+    bong_tai: yup.string().required("Quên nhập bông tai nè bro"),
     moc_quay: yup.string().required("Quên nhập mốc quay nè bro."),
     de_tu: yup.string().required("Quên nhập đệ tử nè bro."),
     set_kich_hoat: yup.array().min(1, "Quên chọn set kich hoat nè bro."),
@@ -45,7 +45,7 @@ const CreateAccount = () => {
       price: 0,
       server: "",
       hanh_tinh: "",
-      bong_tai: [],
+      bong_tai: "",
       moc_quay: "",
       de_tu: "",
       set_kich_hoat: [],
@@ -66,7 +66,7 @@ const CreateAccount = () => {
       });
     },
     onSuccess(data, variables, context) {
-      changeView(pathNames.wall.replace(':username', user.username || user.id));
+      changeView(pathNames.wall.replace(":username", user.username || user.id));
       toast.success("Đăng nick thành công.");
       usedTurn();
     },
@@ -82,7 +82,7 @@ const CreateAccount = () => {
         set_kich_hoat: data?.set_kich_hoat
           ?.map((item: any) => item.value)
           ?.join(","),
-        bong_tai: data?.bong_tai?.map((item: any) => item.value)?.join(","),
+        bong_tai: data?.bong_tai,
         server: data.server,
         hanh_tinh: data.hanh_tinh,
         moc_quay: data.moc_quay,
@@ -108,7 +108,11 @@ const CreateAccount = () => {
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               {images?.map((item, index) => (
-                <LazyLoadImage key={index} src={getImageServer(item)} className="h-28" />
+                <LazyLoadImage
+                  key={index}
+                  src={getImageServer(item)}
+                  className="h-28"
+                />
               ))}
             </div>
             {images.length < 5 && (
@@ -162,7 +166,7 @@ const CreateAccount = () => {
         </div>
         <div className="flex flex-col gap-2">
           <span className="text-gradient-primary text-xl">Bông tai</span>
-          <MultiSelect
+          <Select
             errors={errors}
             name="bong_tai"
             control={control}

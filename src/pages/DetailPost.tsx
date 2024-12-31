@@ -43,7 +43,7 @@ const example: any = {
   images: exampleImages,
 };
 const DetailPost = () => {
-  const { header, setHeaderBack } = useCommonStore();
+  const { header, setHeaderBack, setPost } = useCommonStore();
   useEffect(() => {
     setHeaderBack(true);
   }, []);
@@ -69,6 +69,12 @@ const DetailPost = () => {
     createdAt,
     user,
   } = data;
+
+  useEffect(() => {
+    if (data) {
+      setPost(data);
+    }
+  }, [data?.id]);
 
   const { changeView } = useChangeRoute();
   return (

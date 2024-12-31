@@ -16,6 +16,7 @@ interface ICommonState {
     headerBack?: boolean;
   };
   query?: any;
+  post: any;
   setHeaderTitle: (title: string) => void;
   setHeaderActions: (actions: IAction[]) => void;
   setHeaderBack: (headerBack: boolean) => void;
@@ -23,6 +24,7 @@ interface ICommonState {
   setLoadingUpload: (key: string, isLoading: boolean) => void;
   resetActions: () => void;
   setQuery: (query: any) => void;
+  setPost: (post: any) => void;
 }
 
 export const useCommonStore = create<ICommonState>((set) => ({
@@ -33,6 +35,7 @@ export const useCommonStore = create<ICommonState>((set) => ({
     actions: [],
   },
   query: {},
+  post: {},
   setQuery: (query: any) => {
     set((state) => ({
       ...state,
@@ -80,6 +83,12 @@ export const useCommonStore = create<ICommonState>((set) => ({
     set((state) => ({
       ...state,
       isLoadingUpload: { ...state.isLoadingUpload, [key]: isLoading },
+    }));
+  },
+  setPost: (post: any) => {
+    set((state) => ({
+      ...state,
+      post,
     }));
   },
 }));
