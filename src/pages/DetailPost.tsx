@@ -127,43 +127,43 @@ const DetailPost = () => {
         <div className=" text-sm mt-2">
           <div>
             Giá:{" "}
-            <span className="uppercase text-gradient-secondary">
+            <span className="uppercase text-gradient-secondary font-semibold">
               {formatCash(price)}
             </span>
           </div>
           <div>
             Server:{" "}
-            <span className="uppercase text-gradient-secondary">
+            <span className="uppercase text-gradient-secondary font-semibold">
               {meta?.server || "--"}
             </span>
           </div>
           <div>
             Hành tinh:{" "}
-            <span className="uppercase text-gradient-secondary">
+            <span className="uppercase text-gradient-secondary font-semibold">
               {meta?.hanh_tinh || "--"}
             </span>
           </div>
           <div>
             Sét kích hoạt:{" "}
-            <span className="uppercase text-gradient-secondary">
+            <span className="uppercase text-gradient-secondary font-semibold">
               {meta?.set_kich_hoat || "--"}
             </span>
           </div>
           <div>
             Đệ tử:{" "}
-            <span className="uppercase text-gradient-secondary">
+            <span className="uppercase text-gradient-secondary font-semibold">
               {translateDeTu(meta?.de_tu)}
             </span>
           </div>
           <div>
             Bông tai:{" "}
-            <span className="uppercase text-gradient-secondary">
+            <span className="uppercase text-gradient-secondary font-semibold">
               {translateBongTai(meta?.bong_tai)}
             </span>
           </div>
           <div>
             Mốc quay thượng đế:{" "}
-            <span className="uppercase text-gradient-secondary">
+            <span className="uppercase text-gradient-secondary font-semibold">
               {translateMocQuay(meta?.moc_quay)}
             </span>
           </div>

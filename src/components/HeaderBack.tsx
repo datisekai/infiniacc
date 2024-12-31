@@ -18,7 +18,9 @@ const HeaderBack = () => {
       >
         <IoChevronBack className="text-xl" />
       </div>
-      <div className="text-center">Bài viết của {post?.user?.name || ""}</div>
+      <div className="text-center">
+        Bài viết của {post?.user?.username || post?.user?.name || ""}
+      </div>
     </div>
   );
 };
