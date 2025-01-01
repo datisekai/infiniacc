@@ -35,4 +35,8 @@ export const apiConfig = {
     method: "GET",
     endpoint: "/api.post/:id",
   },
+  createFeedback: {
+    method: "POST",
+    endpoint: "/api.feedback",
+  },
 };

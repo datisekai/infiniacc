@@ -8,4 +8,5 @@ export const pathNames = {
   createAccount: "/create-account",
   editAccount: "/edit-account/:id",
   detailPost: "/post/:id",
+  feedback: "/feedback",
 };

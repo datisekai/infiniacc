@@ -5,6 +5,7 @@ import { FaUserSecret } from "react-icons/fa";
 import { MdOutlinePriceCheck } from "react-icons/md";
 import { AiFillGold } from "react-icons/ai";
 import { GiTargetDummy } from "react-icons/gi";
+import { VscFeedback } from "react-icons/vsc";
 
 export const sidebarConfig = [
   {
@@ -36,6 +37,11 @@ export const sidebarConfig = [
     label: "Bảng giá",
     icon: MdOutlinePriceCheck,
     to: pathNames.pricing,
+  },
+  {
+    label: "Góp ý",
+    icon: VscFeedback,
+    to: pathNames.feedback,
   },
 ];
 
