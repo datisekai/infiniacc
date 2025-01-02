@@ -11,6 +11,7 @@ import Pricing from "../pages/Pricing";
 import Profile from "../pages/Profile";
 import Wall from "../pages/Wall";
 import AuthLayout from "../layouts/AuthLayout";
+import Feedback from "../pages/Feedback";
 
 const router = createBrowserRouter([
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: pathNames.detailPost,
                 element: <DetailPost />
+            },
+            {
+                path: pathNames.feedback,
+                element: <AuthLayout><Feedback></Feedback></AuthLayout>
             }
         ],
     },
