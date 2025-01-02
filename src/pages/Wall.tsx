@@ -10,7 +10,11 @@ import useChangeRoute from "../hooks/useChangeRoute";
 import { pathNames } from "../constants/pathname";
 import { useAuthStore } from "../stores/authStore";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { apiConfig, sendServerRequest } from "../apis";
 import Spinner from "../components/Spinner";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -20,8 +24,8 @@ import toast from "react-hot-toast";
 const Wall = () => {
   const { query } = useCommonStore();
   const { user } = useAuthStore();
-  const { changeView } = useChangeRoute()
-  const queryClient = useQueryClient()
+  const { changeView } = useChangeRoute();
+  const queryClient = useQueryClient();
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["post-me", user?.id, query],
@@ -50,7 +54,7 @@ const Wall = () => {
       });
     },
     onSuccess(id, variables) {
-      toast.success("Xoá bài đăng thành công.")
+      toast.success("Xoá bài đăng thành công.");
       queryClient.setQueryData(["posts", query], (oldData: any) => {
         if (!oldData) return oldData;
 
@@ -64,9 +68,9 @@ const Wall = () => {
     },
     onError(error) {
       console.log(error);
-      toast.error("Có lỗi xảy ra, hãy thử lại sau.")
-    }
-  })
+      toast.error("Có lỗi xảy ra, hãy thử lại sau.");
+    },
+  });
 
   const posts = useMemo(() => {
     return data?.pages?.reduce((pre, cur) => {
@@ -97,24 +101,36 @@ const Wall = () => {
               ></div>
               <div className="flex justify-center items-center gap-2">
                 <MdLocalPhone />
-                <span>Số điện thoại: <span className="text-gradient-primary">{user?.contact?.phone || "---"}</span></span>
+                <span>
+                  Điện thoại:{" "}
+                  <span className="text-gradient-primary">
+                    {user?.contact?.phone || "---"}
+                  </span>
+                </span>
               </div>
               <div className="flex justify-center items-center gap-2">
                 <IoIosSend />
-                <span>Số Zalo: <span className="text-gradient-primary">{user?.contact?.zalo || "---"}</span></span>
+                <span>
+                  Số Zalo:{" "}
+                  <span className="text-gradient-primary">
+                    {user?.contact?.zalo || "---"}
+                  </span>
+                </span>
               </div>
               <div className="flex justify-center items-center gap-2">
                 {" "}
                 <FaFacebookMessenger />{" "}
                 <span>
                   Link Messenger:{" "}
-                  <span className="text-gradient-primary">{user?.contact?.messenger ? (
-                    <a href={user?.contact?.messenger} target="_blank">
-                      Nhắn tin
-                    </a>
-                  ) : (
-                    "---"
-                  )}</span>
+                  <span className="text-gradient-primary">
+                    {user?.contact?.messenger ? (
+                      <a href={user?.contact?.messenger} target="_blank">
+                        Nhắn tin
+                      </a>
+                    ) : (
+                      "---"
+                    )}
+                  </span>
                 </span>
               </div>
             </div>
@@ -145,8 +161,18 @@ const Wall = () => {
             />
           ))}
           {posts?.length == 0 && (
-            <div className="flex flex-col justify-center items-center gap-2"> <p className="text-center mt-10 text-lg">Chưa có bài viết nào. </p>
-              <button className="warning-btn" onClick={() => changeView(pathNames.createAccount)}>Đăng nick ngay</button></div>
+            <div className="flex flex-col justify-center items-center gap-2">
+              {" "}
+              <p className="text-center mt-10 text-lg">
+                Chưa có bài viết nào.{" "}
+              </p>
+              <button
+                className="warning-btn"
+                onClick={() => changeView(pathNames.createAccount)}
+              >
+                Đăng nick ngay
+              </button>
+            </div>
           )}
         </InfiniteScroll>
       </div>
